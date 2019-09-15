@@ -25,7 +25,12 @@ class HomeWidget extends StatelessWidget {
                 },
               );
             } else {
-              return Text("Data not available yet");
+              return Center(
+                child: const Text(
+                  'Loading data...',
+                  style: TextStyle(fontSize: 32),
+                ),
+              );
             }
           },
           future: getOrderbook()
