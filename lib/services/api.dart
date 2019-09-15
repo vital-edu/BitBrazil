@@ -1,3 +1,4 @@
+import 'package:bit_brazil/models/exchanges.dart';
 import 'package:bit_brazil/models/orderbook.dart';
 import 'package:bit_brazil/models/ticker.dart';
 import 'package:http/http.dart' as http;
@@ -12,4 +13,9 @@ Future<Ticker> getTicker() async {
 Future<Orderbook> getOrderbook() async {
   final response = await http.get('$baseUrl/orderbook');
   return orderbookFromJson(response.body);
+}
+
+Future<List<Exchange>> getExchanges() async {
+  final response = await http.get('$baseUrl/exchanges');
+  return exchangesFromJson(response.body);
 }
