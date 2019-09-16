@@ -41,7 +41,7 @@ class OrderbookWidget extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     return OrderWidget(
                       order: orders[index],
-                      color: index < snap.data.asks.length ? Colors.red : Colors.blue,
+                      color: index < snap.data.asks.length ? Color(0xffdf4d33) : Color(0xff2186bf),
                     );
                   },
                 )
@@ -52,7 +52,7 @@ class OrderbookWidget extends StatelessWidget {
           return Center(
             child: const Text(
               'Carregando dados...',
-              style: TextStyle(fontSize: 32),
+              style: TextStyle(fontSize: 32, color: Colors.white),
             ),
           );
         }
@@ -70,7 +70,6 @@ class OrderbookHeader extends StatelessWidget {
         title: Row(
           children: [
             Expanded(
-              flex: 1,
               child: Text(
                 'Preço (BRL)',
                 textAlign: TextAlign.center,
@@ -78,7 +77,6 @@ class OrderbookHeader extends StatelessWidget {
               ),
             ),
             Expanded(
-              flex: 1,
               child: Text(
                 'Volume (BTC)',
                 textAlign: TextAlign.center,
@@ -106,9 +104,23 @@ class OrderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: ListTile(
-        title: Text(
-          order.price.toString(),
-          style: TextStyle(color: color),
+        title: Row(
+          children: [
+            Expanded(
+              child: Text(
+                order.price.toStringAsFixed(2),
+                style: TextStyle(color: color, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            Expanded(
+              child: Text(
+                order.amount.toStringAsFixed(8),
+                style: TextStyle(color: Colors.white),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
         ),
       ),
     );
