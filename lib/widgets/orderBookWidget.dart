@@ -24,9 +24,20 @@ class OrderbookWidget extends StatelessWidget {
                   padding: EdgeInsets.all(8),
                   itemCount: orders.length,
                   itemBuilder: (BuildContext context, int index) {
+                    OrderWidgetStyle orderStyle;
+                    if (index < snap.data.asks.length - 1) {
+                      orderStyle = OrderWidgetStyle.askOrder;
+                    } else if (index == snap.data.asks.length - 1) {
+                      orderStyle = OrderWidgetStyle.highlightedAskOrder;
+                    } else if (index == snap.data.asks.length) {
+                      orderStyle = OrderWidgetStyle.highlighteBidOrder;
+                    } else {
+                      orderStyle = OrderWidgetStyle.bidOrder;
+                    }
+
                     return OrderWidget(
                       order: orders[index],
-                      color: index < snap.data.asks.length ? Color(0xffdf4d33) : Color(0xff2186bf),
+                      style: orderStyle,
                     );
                   },
                 )
